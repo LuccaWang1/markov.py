@@ -8,15 +8,9 @@ def open_and_read_file(file_path):
     Takes a string that is a file path, opens the file, and turns the file's contents as one string of text."""
     with open(file_path) as f:
         read_data = f.read()
-        print(read_data)
-        
-#     text = text.split(file_path)
-    
-#     print(text)
+        return read_data
 
-open_and_read_file("green_eggs.txt")
-
-    #return 'Contents of your file as one long string'
+open_and_read_file("green-eggs.txt")
 
 
 # def make_chains(text_string):
