@@ -61,30 +61,72 @@ def make_chains(text_string):
         str_val = [text_string[i+2]]
         #if tup_key not in chains:
         chains[tup_key] = str_val
-    #print(chains.keys())
     
     return chains
 
 
-# def make_text(chains):
-#     """Return text from chains."""
+def make_text(chains):
+    """Return text from chains."""
 
-#     words = []
+    words = []
+
+    random_key = choice(list(chains.keys()))
+    #print(random_key)
+
+    random_value = chains[random_key]
+    #print(first_string)
+
+    first_string_of_words = list(random_key)
+    first_string_of_words = (first_string_of_words + random_value)
+    print(first_string_of_words)
+    
+    for i, word in enumerate(first_string_of_words):
+        key = (words[i + 1], words[i + 2])
+        value = chains[key]
+        first_string_of_words.append(value)
+    
+    # second_key = (first_string_of_words[1], first_string_of_words[2])
+    # second_string = chains[second_key]
+    # print(second_string)
 
     
 
-#     return ' '.join(words)
 
 
-# input_path = 'green-eggs.txt'
+    # container.append(random_key[0])
+    # container.append(random_key[1])
+    #print(container)
+    #print(container[0] + " "
+    #      + container[1])
+    
+    #for words in list(chains)
+    
+    #starting_point = chains[0]
+    # print(chains{[0]}
+    # print(starting_point)
+    
+    #for i, collection in enumerate(chains): 
+    # #    print("The {collection}'s index is {i}")
 
-# # Open the file and turn it into one long string
-# input_text = open_and_read_file(input_path)
+    # keys_only = chains.keys()
+    # keys_only = keys_only.items()
+    # print(keys_only[0])
+    
+    # list(chains[tup_key[0]])
+    
+    
+    #return ' '.join(words)
 
-# # Get a Markov chain
-# chains = make_chains(input_text)
 
-# # Produce random text
-# random_text = make_text(chains)
+input_path = 'green-eggs.txt'
 
-# print(random_text)
+# Open the file and turn it into one long string
+input_text = open_and_read_file(input_path)
+
+# Get a Markov chain
+chains = make_chains(input_text)
+
+# Produce random text
+random_text = make_text(chains)
+
+print(random_text)
