@@ -8,7 +8,8 @@ def open_and_read_file(file_path):
     Takes a string that is a file path, opens the file, and turns the file's contents as one string of text."""
     with open(file_path) as f:
         read_data = f.read()
-        return read_data
+        return read_data.split()
+
 
 def make_chains(text_string):
     """Take input text as string; return dictionary of Markov chains.
@@ -34,91 +35,52 @@ def make_chains(text_string):
         >>> chains[('there','juanita')]
         [None]
     """
-    
-    #creating a dictionary
+
+    # creating a dictionary
     # #cut the string into a list of strings
     # words = text.split()
-    # #iterate through the list 
+    # #iterate through the list
     #     #for idx, num in range(len(words)):
     # for i in range(len(words) - 2)
-    # #potential key is first word, second word, in a tuple 
+    # #potential key is first word, second word, in a tuple
     # tup_key = (words[i], words[i + 1])
-    #value is a the third word, which we want to put into a list 
+    # value is a the third word, which we want to put into a list
     # value is a list
-    #if the key is already in the dictionary
-        #add the value to the list stored at that key in the dictionary 
-    #if the key is not in the dictionary yet
-        #add the key to the dictionary, have an empty list as the value 
-        #add the string value to that list 
-    #return the dictionary 
+    # if the key is already in the dictionary
+    # add the value to the list stored at that key in the dictionary
+    # if the key is not in the dictionary yet
+    # add the key to the dictionary, have an empty list as the value
+    # add the string value to that list
+    # return the dictionary
     chains = {}
 
-    text = open_and_read_file("green-eggs.txt")
-    text_string = text.split()
-    
     for i in range(len(text_string)-2):
         tup_key = (text_string[i], text_string[i+1])
         str_val = [text_string[i+2]]
-        #if tup_key not in chains:
+        # if tup_key not in chains:
         chains[tup_key] = str_val
-    
+
     return chains
 
 
 def make_text(chains):
     """Return text from chains."""
-
+    
     words = []
+    key = choice(list(chains.keys()))  # ('would', 'you')
+    words.append(key[0])
+    words.append(key[1])
 
-    random_key = choice(list(chains.keys()))
-    #print(random_key)
+    while key in chains: #so it'll always be in range
+        values = chains[key]  # ['could', ...]
+        word = choice(values)  # 'could'
+        words.append(word)
+        key = (key[1], word)  # ('you', 'could')
 
-    random_value = chains[random_key]
-    #print(first_string)
-
-    first_string_of_words = list(random_key)
-    first_string_of_words = (first_string_of_words + random_value)
-    print(first_string_of_words)
-    
-    for i, word in enumerate(first_string_of_words):
-        key = (words[i + 1], words[i + 2])
-        value = chains[key]
-        first_string_of_words.append(value)
-    
-    # second_key = (first_string_of_words[1], first_string_of_words[2])
-    # second_string = chains[second_key]
-    # print(second_string)
-
-    
+    return ' '.join(words)  # string method for joining
 
 
-
-    # container.append(random_key[0])
-    # container.append(random_key[1])
-    #print(container)
-    #print(container[0] + " "
-    #      + container[1])
-    
-    #for words in list(chains)
-    
-    #starting_point = chains[0]
-    # print(chains{[0]}
-    # print(starting_point)
-    
-    #for i, collection in enumerate(chains): 
-    # #    print("The {collection}'s index is {i}")
-
-    # keys_only = chains.keys()
-    # keys_only = keys_only.items()
-    # print(keys_only[0])
-    
-    # list(chains[tup_key[0]])
-    
-    
-    #return ' '.join(words)
-
-
-input_path = 'green-eggs.txt'
+input_path = 'gettysburg.txt'
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
